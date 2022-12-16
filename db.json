@@ -1,0 +1,19 @@
+{
+  "posts": [
+    {
+      "title": "블로그 제목",
+      "body": "블로그 내용",
+      "id": 1
+    },
+    {
+      "title": "gd",
+      "body": "gd",
+      "id": 2
+    },
+    {
+      "title": "aasa",
+      "body": "asdasd",
+      "id": 3
+    }
+  ]
+}
