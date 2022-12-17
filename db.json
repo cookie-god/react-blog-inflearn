@@ -1,18 +1,24 @@
 {
   "posts": [
     {
-      "title": "블로그 제목",
-      "body": "블로그 내용",
-      "id": 1
+      "title": "check1",
+      "body": "chedqweㄴㅇㅋㅌㅁ",
+      "createdAt": 1671241148249,
+      "id": 1,
+      "publish": false
     },
     {
-      "title": "gd",
-      "body": "gd",
-      "id": 2
+      "title": "check2",
+      "body": "asdqweczx",
+      "createdAt": 1671241153736,
+      "id": 2,
+      "publish": true
     },
     {
-      "title": "aasa",
-      "body": "asdasd",
+      "title": "redux",
+      "body": "redux",
+      "publish": false,
+      "createdAt": 1671243603952,
       "id": 3
     }
   ]
