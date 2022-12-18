@@ -1,3 +1,4 @@
+import AdminPage from "./pages/AdminPage";
 import CreatePage from "./pages/CreatePage";
 import EditPage from "./pages/EditPage";
 import HomePage from "./pages/HomePage";
@@ -12,6 +13,10 @@ const routes = [
   {
     path: "/blogs",
     element: ListPage,
+  },
+  {
+    path: "/admin",
+    element: AdminPage,
   },
   {
     path: "/blogs/:id",

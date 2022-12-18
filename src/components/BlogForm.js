@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router-dom";
 import { bool } from "prop-types";
 
 const BlogForm = ({ editing }) => {
@@ -39,7 +39,7 @@ const BlogForm = ({ editing }) => {
   };
 
   const goBack = () => {
-    editing === true ? navigate(`/blogs/${id}`) : navigate("/blogs");
+    editing === true ? navigate(`/blogs/${id}`) : navigate("/admin");
   };
 
   const onSubmit = async () => {
@@ -57,7 +57,7 @@ const BlogForm = ({ editing }) => {
         publish: publish,
         createdAt: Date.now(),
       });
-      navigate("/blogs");
+      navigate("/admin");
     }
   };
 
