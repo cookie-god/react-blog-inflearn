@@ -13,6 +13,8 @@ const BlogForm = ({ editing }) => {
   const [originalTitle, setOriginalTitle] = useState("");
   const [originalBody, setOriginalBody] = useState("");
   const [originalPublish, setOriginalPublish] = useState(false);
+  const [titleError, setTitleError] = useState(false);
+  const [bodyError, setBodyError] = useState(false);
 
   const getPost = async (id) => {
     if (editing) {
@@ -42,22 +44,42 @@ const BlogForm = ({ editing }) => {
     editing === true ? navigate(`/blogs/${id}`) : navigate("/admin");
   };
 
+  const validateForm = () => {
+    let validated = true;
+
+    if (title === "") {
+      setTitleError(true);
+      validated = false;
+    }
+
+    if (body === "") {
+      setBodyError(true);
+      validated = false;
+    }
+
+    return validated;
+  };
+
   const onSubmit = async () => {
-    if (editing) {
-      await axios.patch(`http://localhost:3001/posts/${id}`, {
-        title: title,
-        body: body,
-        publish: publish,
-      });
-      navigate(`/blogs/${id}`);
-    } else {
-      await axios.post("http://localhost:3001/posts", {
-        title: title,
-        body: body,
-        publish: publish,
-        createdAt: Date.now(),
-      });
-      navigate("/admin");
+    setTitleError(false);
+    setBodyError(false);
+    if (validateForm()) {
+      if (editing) {
+        await axios.patch(`http://localhost:3001/posts/${id}`, {
+          title: title,
+          body: body,
+          publish: publish,
+        });
+        navigate(`/blogs/${id}`);
+      } else {
+        await axios.post("http://localhost:3001/posts", {
+          title: title,
+          body: body,
+          publish: publish,
+          createdAt: Date.now(),
+        });
+        navigate("/admin");
+      }
     }
   };
 
@@ -71,19 +93,21 @@ const BlogForm = ({ editing }) => {
       <div className="mb-3">
         <label className="form-label">Title</label>
         <input
-          className="form-control"
+          className={`form-control ${titleError ? "border-danger" : ""}`}
           value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
+        {titleError && <div className="text-danger">Title is required.</div>}
       </div>
       <div className="mb-3">
         <label className="form-label">Body</label>
         <textarea
-          className="form-control"
+          className={`form-control ${bodyError ? "border-danger" : ""}`}
           value={body}
           onChange={(event) => setBody(event.target.value)}
           rows="10"
         />
+        {bodyError && <div className="text-danger">Body is required.</div>}
       </div>
       <div className="form-check mb-3">
         <input

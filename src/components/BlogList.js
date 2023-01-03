@@ -26,6 +26,7 @@ const BlogList = ({ isAdmin }) => {
 
   const onClickPageButton = (page) => {
     navigate(`${location.pathname}?page=${page}`);
+    setCurrentPage(page);
     getPosts(page);
   };
 
@@ -53,8 +54,8 @@ const BlogList = ({ isAdmin }) => {
 
   useEffect(() => {
     setCurrentPage(parseInt(pageParam) || 1);
-    getPosts(parseInt(pageParam));
-  }, [pageParam, getPosts]);
+    getPosts(parseInt(pageParam) || 1);
+  }, []);
 
   const deleteBlog = async (event, id) => {
     event.stopPropagation();
@@ -89,8 +90,12 @@ const BlogList = ({ isAdmin }) => {
     });
   };
 
-  const onSearch = () => {
-    getPosts(1);
+  const onSearch = (e) => {
+    if (e.key === "Enter") {
+      navigate(`${location.pathname}?page=1`);
+      setCurrentPage(1);
+      getPosts(1);
+    }
   };
 
   return (
